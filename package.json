@@ -1,5 +1,5 @@
 {
-  "name": "11",
+  "name": "NodeJS-blog",
   "version": "1.0.0",
   "description": "node.js",
   "main": "index.js",
@@ -19,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/nfl404/Node.js-blog/issues"
   },
-  "homepage": "https://github.com/nfl404/Node.js-blog#readme"
+  "homepage": "https://github.com/nfl404/Node.js-blog#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookies": "^0.7.1",
+    "express": "^4.16.2",
+    "markdown": "^0.5.0",
+    "mongoose": "^4.13.0",
+    "swig": "^1.4.2"
+  }
 }
