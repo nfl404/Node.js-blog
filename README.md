@@ -64,7 +64,18 @@ node.js实现前后台开发,案例:博客开发
    
    swig.setDefaults({cache:false});
    
+
+##### 静态文件托管
+
+- 模板引擎的配置和使用
+
+   app.use('/public',express.static(__dirname + '/public'));
    
+   1.用户发送http请求->url->解析路由->找到匹配的规则->制定绑定的函数,返回对应内容至用户
+   
+   2./public->静态->直接读取制定目录下的文件,返回给用户
+   
+   3.动态->处理业务逻辑,加载模板,即系模板->返回数据给用户
    
    
    
