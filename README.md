@@ -78,7 +78,108 @@ node.js实现前后台开发,案例:博客开发
    3.动态->处理业务逻辑,加载模板,即系模板->返回数据给用户
    
    
+##### 模块划分
+
+- 模块划分
+    
+    根据功能进行模块划分:
+    
+    后台:app.use('/admin',require('./router/admin'));
+    
+    前台:app.use('/',require('./router/main'));
+    
+    Api:app.use('api',require('.router/api'));
+    
+    
+##### 前台路由+模板
+
+- main模块
+
+    /                   首页
+    
+    /view               内容也
+    
+##### api路由+模板
+    
+- api模块
+
+    /                   首页
+    
+    /register           用户注册
+    
+    /login              用户登录
+    
+    /comment            评论获取
+    
+    /comment/post       评论提交
+ 
+##### 后台路由+模板
+    
+- admin模块
+    
+    /                   首页
+    
+    用户管理
+    
+    /user               用户列表
+    
+    分类管理
+    
+    /category           分类列表
+        
+    /category/add       分类添加
+    
+    /category/edit      分类修改
+    
+    /category/delete    分类删除
    
+    文章管理
+    
+    /article            内容列表
+    
+    /article/add        内容添加
+    
+    /article/edit       内容修改
+    
+    /article/delete     内容删除
+    
+    评论管理
+    
+    /comment            评论列表
+    
+    /comment/delete     评论删除
+    
+##### 功能开发顺序
+
+- 功能模块开发顺序
+
+    用户
+    
+    栏目
+    
+    内容
+    
+    评论
+    
+- 编码顺序
+
+    通过Schema定义设计数据村塾结构
+    
+    功能逻辑
+    
+    页面展示
+    
+##### 用户注册
+
+- UserSchema结构设计
+
+- 注册界面
+
+- 注册逻辑
+
+    使用ajax方式实现注册
+    
+    api接口编写
    
    
    

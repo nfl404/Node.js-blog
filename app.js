@@ -24,18 +24,27 @@ app.set('view engine','html');
 //在开放过程中,需要取消模板缓存
 swig.setDefaults({cache:false});
 
-/*
+/**
+ * 根据不同功能划分模块
+ */
+app.use('/admin',require('./routers/admin'));
+
+app.use('/',require('./routers/main'));
+
+app.use('/api',require('./routers/api'));
+
+/* 首页
  *  req request对象
  *  res reqsponse对象
  *  next 函数
  */
-app.get('/',function (req,res,next) {
-    //res.send('<h1>欢迎来到NodeJS</h1>')
-    //读取views目录下的指定文件,解析并返回给客户端,
-    //第一个参数:标识模板文件,相对于views目录
-    //第二个参数:传递给模板使用的数据
-    res.render('index');
-});
+// app.get('/',function (req,res,next) {
+//     //res.send('<h1>欢迎来到NodeJS</h1>')
+//     //读取views目录下的指定文件,解析并返回给客户端,
+//     //第一个参数:标识模板文件,相对于views目录
+//     //第二个参数:传递给模板使用的数据
+//     res.render('index');
+// });
 
 
 // app.get('/main.css',function (req,res,next) {
