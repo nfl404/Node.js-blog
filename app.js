@@ -9,6 +9,8 @@ var express = require('express');
 var swig = require('swig');
 //加载数据库模块
 var mongoose = require('mongoose');
+//加载body-parser,用来处理post提交过来的数据
+var bodyParser = require('body-parser');
 //创建app应用=>BideHs Http.createServer();
 var app = express();
 
@@ -27,6 +29,9 @@ app.set('views','./views');
 app.set('view engine','html');
 //在开放过程中,需要取消模板缓存
 swig.setDefaults({cache:false});
+
+//bodyparser设置
+app.use(bodyParser.urlencoded({extended:true}));
 
 /**
  * 根据不同功能划分模块
