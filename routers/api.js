@@ -56,12 +56,16 @@ router.post('/user/register',function (req, res, next) {
         return;
     }
 
+    //两次输入的密码不一致
     if (password != repassword) {
         responseData.code = 4 ;
         responseData.message = '两次输入的密码不一致';
         res.json(responseData);
         return;
     }
+    //用户名是否已经被注册了
+
+    //注册成功
     responseData.message = '注册成功';
     res.json(responseData);
     return;
