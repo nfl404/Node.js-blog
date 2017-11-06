@@ -7,8 +7,12 @@
 var express = require('express');
 //加载模板处理模块
 var swig = require('swig');
+//加载数据库模块
+var mongoose = require('mongoose');
 //创建app应用=>BideHs Http.createServer();
 var app = express();
+
+
 //设置静态文件托管
 //当用户访问的url以/public开始那么直接返回对应的 __dirname + '/public'下的文件
 app.use('/public',express.static(__dirname + '/public'));
@@ -52,7 +56,16 @@ app.use('/api',require('./routers/api'));
 //     res.send("body {background:red;}");
 // });
 
-app.listen(8081);
+//监听http请求
+mongoose.connect('mongodb://localhost:27018/blog',function (err) {
+    if (err) {
+        console.log('数据库链接失败');
+    } else {
+        console.log('数据库链接成功');
+        app.listen(8080);
+    }
+});
+
 
 //1.用户发送http请求->url->解析路由->找到匹配的规则->制定绑定的函数,返回对应内容至用户
 //2./public->静态->直接读取制定目录下的文件,返回给用户

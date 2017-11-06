@@ -182,7 +182,25 @@ node.js实现前后台开发,案例:博客开发
     api接口编写
    
    
-   
+##### Mongodb数据库
+
+- 开启mongodb数据库
+
+    mongodb --dbpath=数据文件保存路径
+
+    https://www.mongodb.com
+
+- 数据库保存
+
+    使用mongoose操作数据库
+
+    http:mongoosejs.com/
+
+- 创建model
+
+    通过Schema创建模型类
+
+    mongoose.model('模型类名称', Schema);
    
    
    
