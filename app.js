@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 /*
     Created by PlusNie on 2017/11/3
     应用程序的启动（入口）文件
-=======
-/**
- * Created by PlusNie on 2017/11/4.
- * 应用程序的启动入口文件
->>>>>>> 595a1935b0308c0d9c638fd84c50d031f1e45d3c
  */
 
 //加载express模块
