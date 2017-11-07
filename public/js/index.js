@@ -64,7 +64,14 @@ $(function() {
 
                 if (!result.code) {
                     //登录成功
-                    window.location.reload();
+                    setTimeout(function () {
+                        $loginBox.hide();
+                        $userInfo.show();
+                        //显示登陆用户的信息
+                        $userInfo.find('.username').html(result.userInfo.username);
+                        $userInfo.find('.info').html('你好，欢迎光临我的博客！');
+                    }, 1000);
+                    // window.location.reload();
                 }
             }
         })

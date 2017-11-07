@@ -90,4 +90,42 @@ router.post('/user/register',function (req, res, next) {
     });
 });
 
+/**
+ * 登陆
+ */
+router.post('/user/login',function (req,res,next) {
+
+    var username = req.body.username;
+    var password = req.body.password;
+
+    //用户名和密码不能为空
+    if (username == '' || password == '') {
+        responseData.code = 1;
+        responseData.message = '用户名和密码不能为空';
+        res.json(responseData);
+        return;
+    }
+
+    //查询数据库中相同用户名和密码的记录是否存在，如果存在则登录成功
+    User.findOne({
+        username: username,
+        password: password
+    }).then(function (userInfo) {
+        //console.log(userInfo);
+        if (!userInfo) {
+            responseData.code = 2;
+            responseData.message = '用户名或密码错误';
+            res.json(responseData);
+            return;
+        }
+        responseData.message  = '登陆成功';
+        responseData.userInfo = {
+            _id : userInfo._id,
+            username : userInfo.username
+        }
+        res.json(responseData);
+        return;
+    });
+})
+
 module.exports = router;
