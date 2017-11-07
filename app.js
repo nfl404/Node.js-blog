@@ -16,6 +16,7 @@ var Cookies = require('cookies');
 //创建app应用=>BideHs Http.createServer();
 var app = express();
 
+var User = require('./models/User');
 
 //设置静态文件托管
 //当用户访问的url以/public开始那么直接返回对应的 __dirname + '/public'下的文件
@@ -44,11 +45,17 @@ app.use(function (req,res,next) {
     if (req.cookies.get('userInfo')) {
         try {
             req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+            //获取当前用户的类型，是否是管理员
+            User.findById(req.userInfo._id).then(function (userInfo) {
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+                next();
+            });
         } catch (e) {
-
+            next();
         }
+    } else {
+        next();
     }
-    next();
 });
 
 /**
