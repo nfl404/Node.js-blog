@@ -82,9 +82,17 @@ router.post('/user/register',function (req, res, next) {
         });
         return user.save();
     }).then(function (newUserInfo) {
-       //console.log(newUserInfo);
+        //console.log(newUserInfo);
         //注册成功
-        responseData.message = '注册成功';
+        responseData.message = '注册成功,登录中...';
+        responseData.userInfo = {
+            _id : newUserInfo._id,
+            username : newUserInfo.username
+        }
+        req.cookies.set('userInfo',JSON.stringify( {
+            _id : newUserInfo._id,
+            username : newUserInfo.username
+        }));
         res.json(responseData);
         return;
     });
@@ -123,9 +131,21 @@ router.post('/user/login',function (req,res,next) {
             _id : userInfo._id,
             username : userInfo.username
         }
+        req.cookies.set('userInfo',JSON.stringify( {
+            _id : userInfo._id,
+            username : userInfo.username
+        }));
         res.json(responseData);
         return;
     });
-})
+});
+
+/**
+ * 退出
+ */
+router.get('/user/logout', function (req, res) {
+    req.cookies.set('userInfo',null);
+    res.json(responseData);
+});
 
 module.exports = router;

@@ -11,6 +11,8 @@ var swig = require('swig');
 var mongoose = require('mongoose');
 //加载body-parser,用来处理post提交过来的数据
 var bodyParser = require('body-parser');
+//加载cookies模块
+var Cookies = require('cookies');
 //创建app应用=>BideHs Http.createServer();
 var app = express();
 
@@ -32,6 +34,22 @@ swig.setDefaults({cache:false});
 
 //bodyparser设置
 app.use(bodyParser.urlencoded({extended:true}));
+
+//设置cookie
+app.use(function (req,res,next) {
+    req.cookies = new Cookies(req,res);
+    //console.log(typeof req.cookies.get('userInfo'));
+    //解析登陆的cookies信息
+    req.userInfo = {};
+    if (req.cookies.get('userInfo')) {
+        try {
+            req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+        } catch (e) {
+
+        }
+    }
+    next();
+});
 
 /**
  * 根据不同功能划分模块
