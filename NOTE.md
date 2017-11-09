@@ -18,3 +18,9 @@ Mongodb基础使用
         mongod --dbpath=/Users/huadiwenhua/佛祖保佑🙏\ \ 🙏\ \ 🙏\ \ \ \ 永无bug/Node.js-blog/db  --port=27018
 
         其中--dbpath为存放数据库路径，--port为端口号
+
+#### PHP 安装pcntl扩展
+
+    - 下载php
+
+
