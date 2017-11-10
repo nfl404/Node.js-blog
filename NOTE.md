@@ -24,3 +24,10 @@ Mongodb基础使用
     - 下载php
 
 
+
+
+### 启动/停止workerman
+
+    php start.php start -d
+    php start.php stop -d
+
