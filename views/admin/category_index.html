@@ -14,12 +14,12 @@
     </tr>
     {%for category in categories%}
     <tr>
-        <th>{{category._id.toString()}}</th>
-        <th>{{category.name}}</th>
-        <th>
+        <td>{{category._id.toString()}}</td>
+        <td>{{category.name}}</td>
+        <td>
             <a href="/admin/category/edit?id={{category._id.toString()}}">修改</a>  |
             <a href="/admin/category/del?id={{category._id.toString()}}">删除</a>
-        <th>
+        <td>
     </tr>
     {%endfor%}
 </table>

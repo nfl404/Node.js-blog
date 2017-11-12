@@ -276,7 +276,7 @@ router.get('/content',function (req,res) {
          * 1：升序
          * -1：降序
          */
-        Content.find().sort({_id: -1}).limit(limit).skip(skip).populate('category').then(function (contents) {
+        Content.find().sort({_id: -1}).limit(limit).skip(skip).populate(['category','user']).then(function (contents) {
             console.log(contents);
             res.render('admin/content_index', {
                 userInfo: req.userInfo,
@@ -306,7 +306,7 @@ router.get('/content/add',function (req,res) {
  * 内容保存
  */
 router.post('/content/add',function (req,res) {
-    //console.log(req.body);
+    console.log(req.body);
     if (req.body.category == '') {
         res.render('admin/error',{
             userInfo: req.userInfo,
@@ -339,6 +339,7 @@ router.post('/content/add',function (req,res) {
     new Content({
         category: req.body.category,
         title: req.body.title,
+        user:req.userInfo._id.toString(),
         description: req.body.description,
         content: req.body.content
     }).save().then(function (rs) {
