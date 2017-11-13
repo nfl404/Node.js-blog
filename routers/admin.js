@@ -270,13 +270,15 @@ router.get('/content',function (req,res) {
         page = Math.min(page,pages); //取值不能超过pages
         page = Math.max(page, 1); //取值不能小于1
 
-        var skip = (page -1 ) * 2;
+        var skip = (page -1 ) * limit;
 
         /**
          * 1：升序
          * -1：降序
          */
-        Content.find().sort({_id: -1}).limit(limit).skip(skip).populate(['category','user']).then(function (contents) {
+        Content.find().sort({_id: -1}).limit(limit).skip(skip).populate(['category','user']).sort({
+            addTime: -1
+        }).then(function (contents) {
             console.log(contents);
             res.render('admin/content_index', {
                 userInfo: req.userInfo,
