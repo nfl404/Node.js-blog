@@ -18,9 +18,18 @@
 
 <nav>
     <div class="menu">
+        {%if category == ''%}
         <a href="/" class="focus">首页</a>
-        {%for category in categories%}
-        <a href="/" >{{category.name}}</a>
+        {%else%}
+        <a href="/">首页</a>
+        {%endif%}
+
+        {%for cate in categories%}
+            {%if category == cate.id%}
+            <a href="/?category={{cate.id}}" class="focus">{{cate.name}}</a>
+            {%else%}
+            <a href="/?category={{cate.id}}" >{{cate.name}}</a>
+            {%endif%}
         {%endfor%}
     </div>
 </nav>
