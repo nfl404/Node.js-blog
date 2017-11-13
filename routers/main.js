@@ -7,32 +7,40 @@ var router = express.Router();
 var Category = require('../models/Category');
 var Content = require('../models/Content');
 
+var data;
+/**
+ * 通用数据
+ */
+router.use(function (req,res,next) {
+    data = {
+        userInfo: req.userInfo,
+        categories: []
+    }
+
+    Category.find().then(function (categories) {
+        //console.log(categories);
+        data.categories = categories;
+        next();
+    });
+})
 /**
  * 前台首页
  */
 router.get('/',function (req, res, next) {
     // res.send('main-user');
     //console.log(req.userInfo);
-    var data = {
-        userInfo: req.userInfo,
-        category: req.query.category || '',
-        categories: [],
-        page: Number(req.query.page || 1),
-        count: 0,
-        limit: 3,
-        pages: 1
-    };
+    data.category =  req.query.category || '';
+    data.page = Number(req.query.page || 1);
+    data.count = 0;
+    data.limit = 4;
+    data.pages = 1;
 
     var where = {};
     if (data.category) {
         where.category = data.category;
     }
 
-    Category.find().then(function (categories) {
-        console.log(categories);
-        data.categories = categories;
-        return Content.where(where).count();
-    }).then(function (count) {
+    Content.where(where).count().then(function (count) {
         data.count = count;
         //计算总页数
         data.pages = Math.ceil(data.count/data.limit); //向上区取整
@@ -46,10 +54,24 @@ router.get('/',function (req, res, next) {
         });
     }).then(function (contents) {
         data.contents = contents;
-        console.log(data);
+        //console.log(data);
         res.render('main/index', data);
     })
 
 });
 
+/**
+ * 阅读详情
+ */
+router.get('/view',function (req,res) {
+    var contentId = req.query.contentid || '';
+    Content.findOne({
+        _id: contentId
+    }).then(function (content) {
+        data.content = content;
+        content.views++;
+        content.save();
+        res.render('main/view',data);
+    })
+});
 module.exports = router;
