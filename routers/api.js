@@ -148,7 +148,18 @@ router.get('/user/logout', function (req, res) {
     req.cookies.set('userInfo',null);
     res.json(responseData);
 });
-
+/**
+ * 评论列表
+ */
+router.get('/comment',function (req, res) {
+   var contentId = req.query.contentid || '';
+   Content.findOne({
+       _id: contentId
+   }).then(function (content) {
+       responseData.data = content.comments;
+       res.json(responseData);
+   })
+});
 /**
  * 评论提交
  */

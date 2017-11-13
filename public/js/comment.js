@@ -16,25 +16,22 @@ $('#messageBtn').on('click', function() {
             //console.log(responseData);
             $('#messageContent').val('');
             comments = responseData.data.comments.reverse();
-            renderComment(comments);
-        },
-        error: function (err) {
-            alert(err);
+            renderComment();
         }
     })
 });
 
 //每次页面重载的时候获取一下该文章的所有评论
-// $.ajax({
-//     url: '/api/comment',
-//     data: {
-//         contentid: $('#contentId').val()
-//     },
-//     success: function(responseData) {
-//         comments =responseData.data.reverse();
-//         renderComment();
-//     }
-// });
+$.ajax({
+    url: '/api/comment',
+    data: {
+        contentid: $('#contentId').val()
+    },
+    success: function(responseData) {
+        comments =responseData.data.reverse();
+        renderComment();
+    }
+});
 
 $('.pager').delegate('a', 'click', function() {
     if ($(this).parent().hasClass('previous')) {
@@ -49,7 +46,9 @@ function renderComment() {
 
     $('#messageCount').html(comments.length);
 
+    //总的页数=总评论数／每页评论数量，结果向上取整如：3.3=4，最小为1
     pages = Math.max(Math.ceil(comments.length / prepage), 1);
+    //最小为0
     var start = Math.max(0, (page-1) * prepage);
     var end = Math.min(start + prepage, comments.length);
 
@@ -85,5 +84,5 @@ function renderComment() {
 
 function formatDate(d) {
     var date1 = new Date(d);
-    return date1.getFullYear() + '年' + (date1.getMonth()+1) + '月' + date1.getDate() + '日 ' + date1.getHours() + ':' + date1.getMinutes() + ':' + date1.getSeconds();
+    return date1.getFullYear() + '-' + (date1.getMonth()+1) + '-' + date1.getDate() + ' ' + date1.getHours() + ':' + date1.getMinutes() + ':' + date1.getSeconds();
 }
