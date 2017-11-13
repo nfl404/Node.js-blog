@@ -16,22 +16,25 @@ $('#messageBtn').on('click', function() {
             //console.log(responseData);
             $('#messageContent').val('');
             comments = responseData.data.comments.reverse();
-            renderComment();
+            renderComment(comments);
+        },
+        error: function (err) {
+            alert(err);
         }
     })
 });
 
 //每次页面重载的时候获取一下该文章的所有评论
-$.ajax({
-    url: '/api/comment',
-    data: {
-        contentid: $('#contentId').val()
-    },
-    success: function(responseData) {
-        comments =responseData.data.reverse();
-        renderComment();
-    }
-});
+// $.ajax({
+//     url: '/api/comment',
+//     data: {
+//         contentid: $('#contentId').val()
+//     },
+//     success: function(responseData) {
+//         comments =responseData.data.reverse();
+//         renderComment();
+//     }
+// });
 
 $('.pager').delegate('a', 'click', function() {
     if ($(this).parent().hasClass('previous')) {
