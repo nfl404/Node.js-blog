@@ -32,6 +32,8 @@ node.js实现前后台开发,案例:博客开发
     
     markdown:markdown语法解析生成模块
 
+    ueditor:百度文本编辑器
+
 
 ##### 项目初始化
 
@@ -45,6 +47,7 @@ node.js实现前后台开发,案例:博客开发
     npm install --save swig
     npm install --save mongoose
     npm install --save markdown
+    npm install --save ueditor
     
 ##### 使用模板
    
